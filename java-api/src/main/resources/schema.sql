@@ -34,7 +34,7 @@ CREATE TABLE securities (
     face_value FLOAT NOT NULL CHECK (face_value >= 0),
     issuer_name VARCHAR(50) NOT NULL,
     status VARCHAR(20) NOT NULL,
-    type ENUM('SOVN, GOVN, CORP') NOT NULL,
+    type ENUM('SOVN', 'GOVN', 'CORP') NOT NULL,
     bond_maturity_date DATE NOT NULL
 );
 
