@@ -17,4 +17,36 @@ public class CounterParty {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "counterparty")
     private Set<Trade> trades = new HashSet<>();
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
+    }
+
+    public Set<Trade> getTrades() {
+        return trades;
+    }
+
+    public void setTrades(Set<Trade> trades) {
+        this.trades = trades;
+    }
+
+    @Override
+    public String toString() {
+        return "CounterParty{" +
+                "id=" + id +
+                ", holderName='" + holderName + '\'' +
+                '}';
+    }
 }

@@ -17,4 +17,36 @@ public class User {
 
     @ManyToMany(mappedBy = "bookUsers")
     private Set<Book> userBooks = new HashSet<>();
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Set<Book> getUserBooks() {
+        return userBooks;
+    }
+
+    public void setUserBooks(Set<Book> userBooks) {
+        this.userBooks = userBooks;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

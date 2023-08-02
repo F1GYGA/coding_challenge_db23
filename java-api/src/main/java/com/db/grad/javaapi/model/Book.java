@@ -25,4 +25,44 @@ public class Book {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
     private Set<Trade> trades = new HashSet<>();
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public Set<User> getBookUsers() {
+        return bookUsers;
+    }
+
+    public void setBookUsers(Set<User> bookUsers) {
+        this.bookUsers = bookUsers;
+    }
+
+    public Set<Trade> getTrades() {
+        return trades;
+    }
+
+    public void setTrades(Set<Trade> trades) {
+        this.trades = trades;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", bookName='" + bookName + '\'' +
+                '}';
+    }
 }

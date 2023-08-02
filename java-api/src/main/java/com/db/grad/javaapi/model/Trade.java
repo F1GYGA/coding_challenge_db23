@@ -52,4 +52,109 @@ public class Trade {
 
     @Column(name = "trade_settlement_date", nullable = false)
     private Date tradeSettlementDate;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Bond getBond() {
+        return bond;
+    }
+
+    public void setBond(Bond bond) {
+        this.bond = bond;
+    }
+
+    public CounterParty getCounterparty() {
+        return counterparty;
+    }
+
+    public void setCounterparty(CounterParty counterparty) {
+        this.counterparty = counterparty;
+    }
+
+    public TradeType getTradeType() {
+        return tradeType;
+    }
+
+    public void setTradeType(TradeType tradeType) {
+        this.tradeType = tradeType;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public TradeStatus getTradeStatus() {
+        return tradeStatus;
+    }
+
+    public void setTradeStatus(TradeStatus tradeStatus) {
+        this.tradeStatus = tradeStatus;
+    }
+
+    public float getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(float unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public Date getTradeDate() {
+        return tradeDate;
+    }
+
+    public void setTradeDate(Date tradeDate) {
+        this.tradeDate = tradeDate;
+    }
+
+    public Date getTradeSettlementDate() {
+        return tradeSettlementDate;
+    }
+
+    public void setTradeSettlementDate(Date tradeSettlementDate) {
+        this.tradeSettlementDate = tradeSettlementDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Trade{" +
+                "id=" + id +
+                ", book=" + book.getId() +
+                ", bond=" + bond.getIsin() +
+                ", counterparty=" + counterparty.getId() +
+                ", tradeType=" + tradeType +
+                ", quantity=" + quantity +
+                ", currency='" + currency + '\'' +
+                ", tradeStatus=" + tradeStatus +
+                ", unitPrice=" + unitPrice +
+                ", tradeDate=" + tradeDate +
+                ", tradeSettlementDate=" + tradeSettlementDate +
+                '}';
+    }
 }
