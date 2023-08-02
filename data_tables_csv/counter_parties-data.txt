@@ -1,0 +1,7 @@
+INSERT INTO
+counter_parties(holder_name)
+VALUES
+("AZ Holdings Inc"),("Acme co"),("Sovereign Investments"),
+("Astra Trading Ltd"),("Muncipal Gov Of Orange County"),
+("Goldman Sachs"),("UBS"),("Barclays"),("British Telecom")
+("Pension Holdings"),("Zurich Pension fund 4");
