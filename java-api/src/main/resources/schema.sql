@@ -34,7 +34,7 @@ CREATE TABLE securities (
     face_value FLOAT NOT NULL,
     issued_by VARCHAR(50) NOT NULL,
     status VARCHAR(20) NOT NULL,
-    type VARCHAR(4) NOT NULL
+    type ENUM('SOVN, GOVN, CORP') NOT NULL
 
 );
 
@@ -43,10 +43,10 @@ CREATE TABLE trades (
        book_id INT REFERENCES books (id),
        security_id VARCHAR(12) REFERENCES securities (isin),
        counterparty_id INT REFERENCES counter_parties (id),
-       trade_type  ENUM('buy', 'sell'),
+       trade_type  ENUM('buy', 'sell') NOT NULL,
        quantity INT NOT NULL CHECK (quantity > 0),
        currency VARCHAR(3) NOT NULL,
-       status VARCHAR(20) NOT NULL,
+       status ENUM('open', 'closed') NOT NULL,
        unit_price FLOAT NOT NULL,
        trade_date DATE NOT NULL,
        trade_settlement_date DATE NOT NULL,
