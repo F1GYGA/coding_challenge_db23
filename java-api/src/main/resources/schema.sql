@@ -23,16 +23,16 @@ CREATE TABLE book_user (
 
 CREATE TABLE counter_parties (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    holder_name VARCHAR(50) NOT NULL
+    holder_name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE securities (
     isin VARCHAR(12) PRIMARY KEY,
-    cusip VARCHAR(9),
+    cusip VARCHAR(30),
     bond_currency VARCHAR(3) NOT NULL,
     coupon_percent FLOAT NOT NULL CHECK (coupon_percent >= 0),
     face_value FLOAT NOT NULL CHECK (face_value >= 0),
-    issuer_name VARCHAR(50) NOT NULL,
+    issuer_name VARCHAR(100) NOT NULL,
     status VARCHAR(20) NOT NULL,
     type ENUM('SOVN', 'GOVN', 'CORP') NOT NULL,
     bond_maturity_date DATE NOT NULL
