@@ -7,12 +7,12 @@ DROP TABLE IF EXISTS books;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20) NOT NULL
+    user_name VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    book_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE book_user (
@@ -23,19 +23,19 @@ CREATE TABLE book_user (
 
 CREATE TABLE counter_parties (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    holder_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE securities (
     isin VARCHAR(12) PRIMARY KEY,
     cusip VARCHAR(9),
-    currency VARCHAR(3) NOT NULL,
-    coupon_percent FLOAT NOT NULL,
-    face_value FLOAT NOT NULL,
-    issued_by VARCHAR(50) NOT NULL,
+    bond_currency VARCHAR(3) NOT NULL,
+    coupon_percent FLOAT NOT NULL CHECK (coupon_percent >= 0),
+    face_value FLOAT NOT NULL CHECK (face_value >= 0),
+    issuer_name VARCHAR(50) NOT NULL,
     status VARCHAR(20) NOT NULL,
-    type ENUM('SOVN, GOVN, CORP') NOT NULL
-
+    type ENUM('SOVN, GOVN, CORP') NOT NULL,
+    bond_maturity_date DATE NOT NULL
 );
 
 CREATE TABLE trades (
@@ -45,9 +45,9 @@ CREATE TABLE trades (
        counterparty_id INT REFERENCES counter_parties (id),
        trade_type  ENUM('buy', 'sell') NOT NULL,
        quantity INT NOT NULL CHECK (quantity > 0),
-       currency VARCHAR(3) NOT NULL,
-       status ENUM('open', 'closed') NOT NULL,
-       unit_price FLOAT NOT NULL,
+       trade_currency VARCHAR(3) NOT NULL,
+       trade_status ENUM('open', 'closed') NOT NULL,
+       unit_price FLOAT NOT NULL CHECK (unit_price >= 0),
        trade_date DATE NOT NULL,
        trade_settlement_date DATE NOT NULL,
        CHECK(trade_settlement_date >= trade_date)
