@@ -1,0 +1,4 @@
+INSERT INTO
+USER(name)
+values
+("Alex"),("Bob"),("Carl")

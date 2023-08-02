@@ -1,0 +1,6 @@
+INSERT INTO
+BOOKS(name)
+VALUES
+(trading_book_1),(trading_book_2),
+(trading_book_3),(trading_book_4),
+(trading_book_5),(trading_book_6);
