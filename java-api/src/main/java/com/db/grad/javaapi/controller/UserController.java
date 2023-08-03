@@ -1,11 +1,13 @@
 package com.db.grad.javaapi.controller;
 
+import com.db.grad.javaapi.dto.UserDto;
 import com.db.grad.javaapi.model.User;
 import com.db.grad.javaapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +18,12 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/users")
-    public List<String> getUsers() {
-        return userService.getAllUsers().stream().map(User::toString).collect(Collectors.toList());
+    public List<UserDto> getUsers() {
+        List<UserDto> list = new ArrayList<>();
+
+        for (User user : userService.getAllUsers())
+            list.add(new UserDto(user.getId(), user.getUserName()));
+
+        return list;
     }
 }
