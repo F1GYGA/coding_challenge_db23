@@ -7,12 +7,13 @@ import com.db.grad.javaapi.model.CounterParty;
 import com.db.grad.javaapi.model.Trade;
 import com.db.grad.javaapi.service.BondService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.lang.Math.abs;
 
 @RestController
 public class BondController {
@@ -21,7 +22,6 @@ public class BondController {
     BondService bondService;
 
     @GetMapping("/bonds")
-
     public List<BondDto> getBonds() {
         List<BondDto> list = new ArrayList<>();
 
@@ -33,5 +33,18 @@ public class BondController {
 
         return list;
     }
+
+
+    @GetMapping("/bonds/maturity")
+    public List<BondDto> getMaturityBonds(@RequestParam String date) {
+        List<BondDto> result = new ArrayList<>();
+
+        for (Bond bond : bondService.getMaturityBonds(date))
+            result.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
+                    bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate()));
+
+        return result;
+    }
+
 }
 
