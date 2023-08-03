@@ -1,7 +1,9 @@
 INSERT INTO
-users (user_name)
+users (user_name, password)
 values
-('Alex'),('Bob'),('Carl');
+('Alex', '$2a$10$O0zB0h3r3QTrD0bhmsHhMeDKG0VrMc4IsmscKTrxvvXZNafrq4oo.'),
+('Bob', '$2a$10$v0vekA09NblTw87722BAdOBwhZ085W12ACpaOyBnbXlZ0T8wmdxdK'),
+('Carl', '$2a$10$Mm6amuEKO647B1Yki5ZIoO3HJNh/D3fhOmRk0Sy3.eWV9gsTpW2pC');
 
 INSERT INTO
 books (book_name)

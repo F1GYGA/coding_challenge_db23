@@ -15,6 +15,9 @@ public class User {
     @Column(name = "user_name", nullable = false)
     private String userName;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @ManyToMany(mappedBy = "bookUsers")
     private Set<Book> userBooks = new HashSet<>();
 
@@ -40,6 +43,14 @@ public class User {
 
     public void setUserBooks(Set<Book> userBooks) {
         this.userBooks = userBooks;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
