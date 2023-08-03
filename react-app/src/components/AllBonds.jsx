@@ -12,7 +12,9 @@ const bonds = [
 
 const AllBonds = () => {
   return (
-    <BondDetail info={bonds} />
+    <div>
+        {bonds}
+    </div>
     )
 }
 
