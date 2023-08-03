@@ -2,8 +2,12 @@ package com.db.grad.javaapi.dto;
 
 
 import com.db.grad.javaapi.enums.BondType;
-import java.sql.Date;
 
+import java.sql.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.db.grad.javaapi.model.CounterParty;
 import lombok.Data;
 
 @Data
@@ -17,9 +21,10 @@ public class BondDto {
     private String status;
     private BondType type;
     private Date maturityDate;
+    private List<CounterPartyDto> bondHolders;
 
     public BondDto(String isin, String cusip, String bondCurrency, float couponPercent, float faceValue,
-                   String issuerName, String status, BondType type, Date maturityDate) {
+                   String issuerName, String status, BondType type, Date maturityDate, List<CounterParty> holders) {
         this.isin = isin;
         this.cusip = cusip;
         this.bondCurrency = bondCurrency;
@@ -29,6 +34,7 @@ public class BondDto {
         this.status = status;
         this.type = type;
         this.maturityDate = maturityDate;
+        this.bondHolders = holders.stream().map(holder -> new CounterPartyDto(holder.getId(), holder.getHolderName())).collect(Collectors.toList());
     }
 
     @Override
