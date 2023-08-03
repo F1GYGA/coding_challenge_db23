@@ -1,8 +1,9 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
-import { Pets } from "./components/pets/Pets";
+import AllBonds from "./components/AllBonds";
 
 const App = () => {
-  return <Pets />;
+  return <AllBonds />;
 };
 
 export default App;
