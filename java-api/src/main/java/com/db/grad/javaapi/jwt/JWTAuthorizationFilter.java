@@ -25,9 +25,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final String AUTH_COOKIE = "AUTH_COOKIE";
 
-    private JWTConfig jwtConfig;
+    private final JWTConfig jwtConfig;
 
-    private CustomUserDetailsService userService;
+    private final CustomUserDetailsService userService;
 
     public JWTAuthorizationFilter(@Autowired AuthenticationManager authenticationManager,
                                   @Autowired JWTConfig jwtConfig,
@@ -63,9 +63,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private String getAuthenticationToken(String token) {
         // Parse and verify the provided token.
-        return JWT.require(Algorithm.HMAC512((System.getenv("JWT_SECRET") == null)
-                        ? "default_JWT_secret"
-                        : System.getenv("JWT_SECRET")))
+        return JWT.require(Algorithm.HMAC512(jwtConfig.secret))
                 .build()
                 .verify(token)
                 .getSubject();

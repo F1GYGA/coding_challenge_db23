@@ -10,5 +10,5 @@ public class JWTConfig {
 
     public int expirationTime = (System.getenv("JWT_EXPIRES") == null)
             ? 1209600000
-            : Integer.valueOf(System.getenv("JWT_EXPIRES"));
+            : Integer.parseInt(System.getenv("JWT_EXPIRES"));
 }

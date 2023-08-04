@@ -23,9 +23,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final String AUTH_COOKIE = "AUTH_COOKIE";
 
-    private JWTConfig jwtConfig;
+    private final JWTConfig jwtConfig;
 
-    CustomUserDetailsService userService;
+    private final CustomUserDetailsService userService;
 
     public JWTAuthenticationFilter(@Autowired AuthenticationManager authenticationManager,
                                    @Autowired JWTConfig jwtConfig,
