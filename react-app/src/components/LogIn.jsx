@@ -27,7 +27,12 @@ const LogIn = () => {
         console.log(credentials);
 
         try {
-            const response = await axios.post('http://127.0.0.1:8080/api/auth/login', credentials);
+            const response = await axios.post('http://127.0.0.1:8080/login', credentials, {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            });
             console.log(response);
             if (response.status === 200) {
                 setLoggedIn(true);
