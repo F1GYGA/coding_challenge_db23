@@ -5,9 +5,8 @@ import Row from "../Row";
 const CollapsableTable = ({rows}) => {
     return (
         <TableContainer component={Paper}
-        sx={{
-            backgroundColor: 'lightgray',
-        }}>
+        // 
+        >
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
