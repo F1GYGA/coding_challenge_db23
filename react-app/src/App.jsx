@@ -3,6 +3,7 @@ import React from "react";
 import AllBonds from "./components/AllBonds";
 import BondsMaturity from "./components/BondsMaturity";
 import LogIn from './components/LogIn';
+import UserBooks from './components/UserBooks';
 import { Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import Trades from './components/Trades'
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/login" exact element={<LogIn />} />
             <Route path="/bonds" exact element={<AllBonds />} />
             <Route path="/bonds/maturity" exact element={<BondsMaturity />} />
+             <Route path="/books" exact element={<UserBooks/>} />
             <Route path="/" exact element={<LogIn />} />
             <Route path="/trades" exact element={<Trades />}></Route>
      // <Route path="/trades" exact element={<Trades />}></Route>
