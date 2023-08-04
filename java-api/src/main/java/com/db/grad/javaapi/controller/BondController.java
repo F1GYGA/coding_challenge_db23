@@ -63,7 +63,7 @@ public class BondController {
     public List<BondDto> getLast5MaturityBonds() {
         List<BondDto> result = new ArrayList<>();
 
-        for (Bond bond : bondService.getLastDayMaturityBonds()) {
+        for (Bond bond : bondService.getLast5DaysMaturityBonds()) {
             List<CounterParty> holders = bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
             result.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
                     bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate(), holders));
@@ -73,6 +73,32 @@ public class BondController {
     }
 
 
+    @GetMapping("/bonds/maturity/overdue")
+    public List<BondDto> getNotRedeemedBonds() {
+        List<BondDto> result = new ArrayList<>();
+
+        for (Bond bond : bondService.getPassedAndActiveBonds()) {
+            List<CounterParty> holders = bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
+            result.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
+                    bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate(), holders));
+        }
+
+        return result;
+    }
+
+
+    @GetMapping("/bonds/maturity/redeem")
+    public List<BondDto> triggerRedeemBond(@RequestParam String isim) {
+        List<BondDto> result = new ArrayList<>();
+
+        for (Bond bond : bondService.getUpdatedBondsAfterRedemption(isim)) {
+            List<CounterParty> holders = bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
+            result.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
+                    bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate(), holders));
+        }
+
+        return result;
+    }
 
 }
 
