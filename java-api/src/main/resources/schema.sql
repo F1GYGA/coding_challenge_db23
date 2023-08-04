@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS books;
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_name VARCHAR(20) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    token VARCHAR(255)
 );
 
 CREATE TABLE books (

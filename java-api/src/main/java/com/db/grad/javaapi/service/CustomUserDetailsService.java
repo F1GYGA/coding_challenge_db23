@@ -40,4 +40,16 @@ public class CustomUserDetailsService implements UserDetailsService {
                 authorities);
 
     }
+
+    public User findByName(String username) throws UsernameNotFoundException {
+        return userRepository.findByUserName(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User not found with username: " + username));
+    }
+
+    public void updateToken(String username, String token) {
+        User appUser = findByName(username);
+        appUser.setToken(token);
+        userRepository.save(appUser);
+    }
 }

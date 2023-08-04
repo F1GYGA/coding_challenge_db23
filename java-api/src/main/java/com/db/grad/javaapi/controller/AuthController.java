@@ -11,22 +11,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/appppi/auth")
 @CrossOrigin(origins="http://localhost:3000")
 public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/login")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
+    //@PostMapping("/login")
+    //public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsername(), loginDto.getPassword()));
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+  //              loginDto.getUsername(), loginDto.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
-    }
+    //    SecurityContextHolder.getContext().setAuthentication(authentication);
+      //  return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+   // }
 }
 
 
