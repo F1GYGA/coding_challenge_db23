@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import AllBonds from "./components/AllBonds";
+import BondsMaturity from "./components/BondsMaturity";
 import LogIn from './components/LogIn';
 import { Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
@@ -19,8 +20,8 @@ const App = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/main">All Bonds</Nav.Link>
-              <Nav.Link href="/main">Maturing Bonds</Nav.Link>
+              <Nav.Link href="/bonds">All Bonds</Nav.Link>
+              <Nav.Link href="/bonds/maturity">Maturing Bonds</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -31,7 +32,8 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/login" exact element={<LogIn />} />
-            <Route path="/main" exact element={<AllBonds />} />
+            <Route path="/bonds" exact element={<AllBonds />} />
+            <Route path="/bonds/maturity" exact element={<BondsMaturity />} />
             <Route path="/" exact element={<LogIn />} />
             <Route path="/trades" exact element={<Trades />}></Route>
      // <Route path="/trades" exact element={<Trades />}></Route>

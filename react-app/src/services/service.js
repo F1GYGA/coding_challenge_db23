@@ -8,6 +8,12 @@ export async function getAllBonds(){
     });
 }
 
+export async function getMaturingBonds(date){
+    return await axios.get('http://127.0.0.1:8080/bonds/maturity?date='+date, {
+        withCredentials: true,
+    });
+}
+
 export function getBooks(){
     return http.get("/books");
 }

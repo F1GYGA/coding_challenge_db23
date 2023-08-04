@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import BondsDetail from './BondsDetail'
 import { useEffect } from 'react';
-import { getAllBonds } from '../services/service';
+import { getMaturingBonds } from '../services/service';
 
 //const bonds = []
 
-const AllBonds = () => {
+const BondsMaturity = () => {
   const [bonds, setBonds] = useState([]);
-  
+  const [date, setDate] = useState('2021-08-09');
+
   useEffect(() => {
     getBondsFromAPI();
   },[]);
 
   const getBondsFromAPI = () => {
-    getAllBonds()
+    getMaturingBonds(date)
       .then(res => {
         setBonds(res.data);
         console.log(res.data);
@@ -24,13 +25,9 @@ const AllBonds = () => {
       })
   }
 
-
-
-
   return (
     <BondsDetail info={bonds} />
   )
 }
 
-
-export default AllBonds;
+export default BondsMaturity;
