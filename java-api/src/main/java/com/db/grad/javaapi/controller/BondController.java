@@ -8,12 +8,9 @@ import com.db.grad.javaapi.model.Trade;
 import com.db.grad.javaapi.service.BondService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.lang.Math.abs;
 
 @RestController
 public class BondController {
@@ -39,9 +36,11 @@ public class BondController {
     public List<BondDto> getMaturityBonds(@RequestParam String date) {
         List<BondDto> result = new ArrayList<>();
 
-        for (Bond bond : bondService.getMaturityBonds(date))
+        for (Bond bond : bondService.getMaturityBonds(date)) {
+            List<CounterParty> holders = bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
             result.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
-                    bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate()));
+                    bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate(), holders));
+        }
 
         return result;
     }
