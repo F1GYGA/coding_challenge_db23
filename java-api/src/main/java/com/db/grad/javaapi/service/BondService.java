@@ -108,6 +108,16 @@ public class BondService {
         return result;
     }
 
+    public List<Bond> getRedeemedBonds() {
+        List<Bond> result = new ArrayList<>();
+
+        for (Bond bond : getAllBonds())
+            if (bond.getStatus().equals("inactive"))
+                result.add(bond);
+
+        return result;
+    }
+
 
 }
 
