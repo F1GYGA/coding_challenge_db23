@@ -45,7 +45,7 @@ const LogIn = () => {
     };
 
     if (isLoggedIn) {
-        return <Navigate to="/main" />
+        return <Navigate to="/bonds" />
     }
 
     return (
