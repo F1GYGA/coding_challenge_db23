@@ -23,6 +23,7 @@ const App = () => {
             <Nav className="me-auto">
               <Nav.Link href="/bonds">All Bonds</Nav.Link>
               <Nav.Link href="/bonds/maturity">Maturing Bonds</Nav.Link>
+              <Nav.Link href="/books">My Books</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
