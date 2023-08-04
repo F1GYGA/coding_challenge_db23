@@ -31,13 +31,13 @@ const Row=({row}) =>{
                                 Bond details
                             </Typography>
                             <div>
-                                Currency: {row.currency}
+                                Currency: {row.bondCurrency}
                             </div>
                             <div>
-                                Coupon Percent: {row.coupon_percent}
+                                Coupon Percent: {row.couponPercent}
                             </div>
                             <div>
-                                Face Value: {row.face_value}
+                                Face Value: {row.faceValue}
                             </div>
                             <div>
                                 Status: {row.status}
@@ -46,7 +46,8 @@ const Row=({row}) =>{
                                 Type: {row.type}
                             </div>
                             <div>
-                                Holder Name: {row.holder_name}
+                                Holder Name: {row.bondHolders.map(holder => holder.holderName).join(',')}
+                                
                             </div>
                         </Box>
                     </Collapse>
