@@ -8,10 +8,11 @@ const CollapsableTable = ({rows}) => {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell />
                         <TableCell>ISIN</TableCell>
+                        <TableCell align="center">Maturity Date</TableCell>
                         <TableCell align="center">CUSIP</TableCell>
                         <TableCell align="center">Issuer</TableCell>
+                        <TableCell />
                     </TableRow>
                 </TableHead>
                 <TableBody>

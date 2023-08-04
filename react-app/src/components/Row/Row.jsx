@@ -7,30 +7,43 @@ const Row=({row}) =>{
     return (
         <React.Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+                <TableCell component="th" scope="row">
+                    {row.isin}
+                </TableCell>
+                <TableCell align='center'>{row.maturity}</TableCell>
+                <TableCell align="center">{row.cusip}</TableCell>
+                <TableCell align="center">{row.issuer_name}</TableCell>
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
                         size="small"
                         onClick={() => setOpen(!open)}
                     >
-                        {open ? "View less" : "View more"}
+                        {open ? "Close Details" : "View Deatils"}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row">
-                    {row.isin}
-                </TableCell>
-                <TableCell align="center">{row.cusip}</TableCell>
-                <TableCell align="center">{row.issuer_name}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Typography variant="h6" gutterBottom component="div">
-                                Bonds details
+                                Bond details
                             </Typography>
                             <div>
-                                Bond holder: 
+                                Currency: {row.currency}
+                            </div>
+                            <div>
+                                Coupon Percent: {row.coupon_percent}
+                            </div>
+                            <div>
+                                Face Value: {row.face_value}
+                            </div>
+                            <div>
+                                Status: {row.status}
+                            </div>
+                            <div>
+                                Type: {row.type}
                             </div>
                         </Box>
                     </Collapse>
