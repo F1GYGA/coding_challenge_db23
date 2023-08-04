@@ -46,5 +46,33 @@ public class BondController {
         return result;
     }
 
+    @GetMapping("/bonds/maturity/lastday")
+    public List<BondDto> getLastMaturityBonds() {
+        List<BondDto> result = new ArrayList<>();
+
+        for (Bond bond : bondService.getLastDayMaturityBonds()) {
+            List<CounterParty> holders = bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
+            result.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
+                    bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate(), holders));
+        }
+
+        return result;
+    }
+
+    @GetMapping("/bonds/maturity/last5days")
+    public List<BondDto> getLast5MaturityBonds() {
+        List<BondDto> result = new ArrayList<>();
+
+        for (Bond bond : bondService.getLastDayMaturityBonds()) {
+            List<CounterParty> holders = bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
+            result.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
+                    bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate(), holders));
+        }
+
+        return result;
+    }
+
+
+
 }
 

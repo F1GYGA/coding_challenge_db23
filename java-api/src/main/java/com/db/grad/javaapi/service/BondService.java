@@ -39,5 +39,44 @@ public class BondService {
         return result;
     }
 
+    public List<Bond> getLastDayMaturityBonds() {
+        List<Bond> result = new ArrayList<>();
+
+        for (Bond bond : getAllBonds()) {
+            String maturityDate = String.valueOf(bond.getMaturityDate());
+
+            LocalDate date1 = LocalDate.now();
+            LocalDate date2 = LocalDate.parse(maturityDate);
+
+            if( date1.toEpochDay() == date2.toEpochDay())
+                result.add(bond);
+        }
+
+        return result;
+    }
+
+    public List<Bond> getLast5DaysMaturityBonds() {
+        List<Bond> result = new ArrayList<>();
+
+        for (Bond bond : getAllBonds()) {
+            String maturityDate = String.valueOf(bond.getMaturityDate());
+
+            LocalDate date1 = LocalDate.now();
+            LocalDate date2 = LocalDate.parse(maturityDate);
+
+            long d1 = date1.toEpochDay();
+            long d2 = date2.toEpochDay();
+
+            long daysBetween = (d1 > d2) ? (d2 - d1) : Integer.MAX_VALUE;
+
+            if (daysBetween <= 5)
+                result.add(bond);
+        }
+
+        return result;
+    }
+
+
+
 }
 
