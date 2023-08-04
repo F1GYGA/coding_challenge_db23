@@ -10,11 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -39,5 +37,17 @@ public class CustomUserDetailsService implements UserDetailsService {
                 user.getPassword(),
                 authorities);
 
+    }
+
+    public User findByName(String username) throws UsernameNotFoundException {
+        return userRepository.findByUserName(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User not found with username: " + username));
+    }
+
+    public void updateToken(String username, String token) {
+        User appUser = findByName(username);
+        appUser.setToken(token);
+        userRepository.save(appUser);
     }
 }
