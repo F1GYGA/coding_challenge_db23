@@ -14,8 +14,10 @@ export async function getMaturingBonds(date){
     });
 }
 
-export function getBooks(){
-    return http.get("/books");
+export async function getUserBooks(){
+    return await axios.get('http://127.0.0.1:8080/books', {
+        withCredentials: true,
+    });
 }
 
 export function getCounterParties(){
