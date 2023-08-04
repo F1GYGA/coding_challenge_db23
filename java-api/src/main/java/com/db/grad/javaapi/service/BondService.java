@@ -1,14 +1,15 @@
 package com.db.grad.javaapi.service;
 
-import com.db.grad.javaapi.dto.BondDto;
-import com.db.grad.javaapi.model.Bond;
+import com.db.grad.javaapi.model.*;
 import com.db.grad.javaapi.repository.BondRepository;
+import com.db.grad.javaapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
@@ -17,6 +18,9 @@ public class BondService {
 
     @Autowired
     private BondRepository bondRepo;
+
+    @Autowired
+    private UserRepository userRepo;
 
     public List<Bond> getAllBonds() {
         return bondRepo.findAll();
@@ -37,6 +41,17 @@ public class BondService {
         }
 
         return result;
+    }
+
+    public List<Bond> getBondsInBook(Book book) {
+        return book.getTrades().stream()
+                .map(Trade::getBond)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    public List<CounterParty> getHolders(Bond bond) {
+        return bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
     }
 
 }
