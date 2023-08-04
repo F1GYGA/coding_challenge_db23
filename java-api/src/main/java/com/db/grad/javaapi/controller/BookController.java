@@ -27,7 +27,6 @@ public class BookController {
     BondService bondService;
 
     @GetMapping("/books")
-
     public List<BookDto> getUserBooks() {
 
         List<BookDto> list = new ArrayList<>();
