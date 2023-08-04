@@ -1,8 +1,11 @@
 import http from './axios-common';
+import axios from 'axios';
 
 
-export function getAllBonds(){
-    return http.get("/bonds");
+export async function getAllBonds(){
+    return await axios.get('http://127.0.0.1:8080/bonds', {
+        withCredentials: true,
+    });
 }
 
 export function getBooks(){
