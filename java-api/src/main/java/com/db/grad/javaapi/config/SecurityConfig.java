@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -62,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JWTAuthenticationFilter authenticationFilter() throws Exception {
-        JWTAuthenticationFilter authenticationFilter = new JWTAuthenticationFilter(authenticationManager());
+        JWTAuthenticationFilter authenticationFilter = new JWTAuthenticationFilter(authenticationManager(), jwtConfig, userDetailsService);
         authenticationFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login", "POST"));
         authenticationFilter.setAuthenticationManager(authenticationManagerBean());
         return authenticationFilter;
@@ -91,13 +93,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
                                         .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
                                         .requestMatchers(new AntPathRequestMatcher("/status")).permitAll()
-                                        .anyRequest().permitAll()
+                                        .anyRequest().authenticated()
                         //authorize.requestMatchers(new AntPathRequestMatcher("/status")).permitAll()
                         //        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                         //       .anyRequest().authenticated()
                         //TODO change here to make other endpoints require authentication after creating frontend
 
-                ).formLogin(form -> {
+                )
+                .exceptionHandling(handler -> handler.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+                .formLogin(form -> {
                             form.loginProcessingUrl("/login");
                             form.successHandler((request, response, authentication) -> {
                                 response.setStatus(HttpServletResponse.SC_OK);

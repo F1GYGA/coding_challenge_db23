@@ -24,14 +24,17 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final String AUTH_COOKIE = "AUTH_COOKIE";
 
-    @Autowired
     private JWTConfig jwtConfig;
 
-    @Autowired
     CustomUserDetailsService userService;
 
-    public JWTAuthenticationFilter(@Autowired AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(@Autowired AuthenticationManager authenticationManager,
+                                   @Autowired JWTConfig jwtConfig,
+                                   @Autowired CustomUserDetailsService userService
+                                   ) {
         super(authenticationManager);
+        this.jwtConfig = jwtConfig;
+        this.userService = userService;
     }
 
     @Override
