@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import BondsDetail from './BondsDetail'
 import { useEffect } from 'react';
-import { getAllBonds } from '../services/service';
+import { getAllBonds } from '../services/bond-service';
 
 //const bonds = []
 
 const AllBonds = () => {
   const [bonds, setBonds] = useState([]);
-  
+
   useEffect(() => {
     getBondsFromAPI();
   },[]);
@@ -16,7 +16,6 @@ const AllBonds = () => {
     getAllBonds()
       .then(res => {
         setBonds(res.data);
-        console.log(res.data);
       })
       .catch(err => {
         setBonds([]);
@@ -29,7 +28,6 @@ const AllBonds = () => {
 
   return (
     <BondsDetail info={bonds} />
-    //<BondsDetail info={mergedArr2} />
   )
 }
 

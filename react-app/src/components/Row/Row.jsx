@@ -10,7 +10,7 @@ const Row=({row}) =>{
                 <TableCell component="th" scope="row">
                     {row.isin}
                 </TableCell>
-                <TableCell align='center'>{row.maturityDate}</TableCell>
+                <TableCell align='center'>{row.maturity}</TableCell>
                 <TableCell align="center">{row.cusip}</TableCell>
                 <TableCell align="center">{row.issuer_name}</TableCell>
                 <TableCell>
@@ -31,23 +31,19 @@ const Row=({row}) =>{
                                 Bond details
                             </Typography>
                             <div>
-                                Currency: {row.bondCurrency}
+                                Currency: {row.currency}
                             </div>
                             <div>
-                                Coupon Percent: {row.couponPercent}
+                                Coupon Percent: {row.coupon_percent}
                             </div>
                             <div>
-                                Face Value: {row.faceValue}
+                                Face Value: {row.face_value}
                             </div>
                             <div>
                                 Status: {row.status}
                             </div>
                             <div>
                                 Type: {row.type}
-                            </div>
-                            <div>
-                                Holder Name: {row.bondHolders.map(holder => holder.holderName).join(',')}
-                                
                             </div>
                         </Box>
                     </Collapse>
