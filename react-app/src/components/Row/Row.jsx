@@ -10,7 +10,7 @@ const Row=({row}) =>{
                 <TableCell component="th" scope="row">
                     {row.isin}
                 </TableCell>
-                <TableCell align='center'>{row.maturity}</TableCell>
+                <TableCell align='center'>{row.maturityDate}</TableCell>
                 <TableCell align="center">{row.cusip}</TableCell>
                 <TableCell align="center">{row.issuer_name}</TableCell>
                 <TableCell>
