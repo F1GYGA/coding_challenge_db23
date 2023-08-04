@@ -45,6 +45,9 @@ const Row=({row}) =>{
                             <div>
                                 Type: {row.type}
                             </div>
+                            <div>
+                                Holder Name: {row.holder_name}
+                            </div>
                         </Box>
                     </Collapse>
                 </TableCell>

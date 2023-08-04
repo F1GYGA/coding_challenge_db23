@@ -4,6 +4,7 @@ import AllBonds from "./components/AllBonds";
 import LogIn from './components/LogIn';
 import { Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import Trades from './components/Trades'
 
 
 const App = () => {
@@ -15,6 +16,8 @@ const App = () => {
       <Route path="/login" exact element={<LogIn/>} />
       <Route path="/main" exact element={<AllBonds/>} />
       <Route path="/"  exact element={<LogIn/>} />
+      <Route path="/trades" exact element={<Trades/>}></Route>
+     // <Route path="/trades" exact element={<Trades/>}></Route>
     </Routes>
     </BrowserRouter>
   </React.StrictMode>
