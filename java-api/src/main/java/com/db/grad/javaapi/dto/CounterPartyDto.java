@@ -10,12 +10,12 @@ public class CounterPartyDto {
     private long id;
     private String holderName;
     private double position;
-    private List<TradeDto> bonds;
+    private List<TradeDto> trades;
 
-    public CounterPartyDto(long id, String holderName, double position, List<TradeDto> bonds) {
+    public CounterPartyDto(long id, String holderName, double position, List<TradeDto> trades) {
         this.id = id;
         this.holderName = holderName;
         this.position = position;
-        this.bonds = bonds;
+        this.trades = trades;
     }
 }
