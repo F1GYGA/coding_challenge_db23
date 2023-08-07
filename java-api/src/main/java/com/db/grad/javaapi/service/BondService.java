@@ -6,6 +6,7 @@ import com.db.grad.javaapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -68,5 +69,11 @@ public class BondService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void updateStatus(String isim) {
+        Bond bond = bondRepo.findByIsin(isim);
+        bond.setStatus("inactive");
+        bondRepo.save(bond);
+    }
 }
 

@@ -45,5 +45,10 @@ public class BondController {
         return result;
     }
 
+
+    @PatchMapping("/bonds/maturity/redeem")
+    public void triggerRedeemBond(@RequestParam String isim) {
+        bondService.updateStatus(isim);
+    }
 }
 
