@@ -18,9 +18,11 @@ const Row = (props) => {
                 <TableCell align="center">{props.row.issuerName}</TableCell>
                 {props.row.maturityDate === today
                 && <TableCell align='center' sx={{color:'orange',}}>! due to mature today</TableCell>}
-                {Date.parse(props.row.maturityDate) < Date.parse(today)
+                {Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status === 'active'
                 && <TableCell align='center' sx={{color:'red',}}>! post maturity and not redeemed yet</TableCell>}
                 {Date.parse(props.row.maturityDate) > Date.parse(today)
+                && <TableCell align='center'>- - -</TableCell>}
+                {Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status !== 'active'
                 && <TableCell align='center'>- - -</TableCell>}
                 
                 <TableCell>
