@@ -2,19 +2,23 @@ import React, { useState } from 'react'
 import BondsDetail from './BondsDetail'
 import { useEffect } from 'react';
 import { getMaturingBonds } from '../services/service';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 //const bonds = []
 
 const BondsMaturity = () => {
   const [bonds, setBonds] = useState([]);
-  const [date, setDate] = useState('2021-08-09');
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     getBondsFromAPI();
-  },[]);
+    console.log(date);
+    console.log(date.toISOString().slice(0,10))
+  },[date]);
 
   const getBondsFromAPI = () => {
-    getMaturingBonds(date)
+    getMaturingBonds(date.toISOString().slice(0,10))
       .then(res => {
         setBonds(res.data);
         console.log(res.data);
@@ -26,7 +30,11 @@ const BondsMaturity = () => {
   }
 
   return (
-    <BondsDetail info={bonds} />
+    <>
+      <DatePicker selected={date} onChange={(startDate)=>setDate(startDate)}/>
+      <BondsDetail info={bonds} />
+      
+    </>
   )
 }
 
