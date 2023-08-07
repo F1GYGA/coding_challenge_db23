@@ -11,19 +11,18 @@ import com.db.grad.javaapi.repository.CounterPartyRepository;
 import com.db.grad.javaapi.repository.TradeRepository;
 import com.db.grad.javaapi.repository.UserRepository;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -42,16 +41,12 @@ class TradeServiceTest {
     @Autowired
     private TradeRepository tradeRepository;
 
-    private Book book;
     private CounterParty client;
 
 
 
     @BeforeAll
     void setUp() {
-        this.client = new CounterParty();
-        client.setHolderName("Atta Systems");
-
         Trade trade = new Trade();
         trade.setTradeType(TradeType.buy);
         trade.setQuantity(100);
@@ -61,26 +56,29 @@ class TradeServiceTest {
         trade.setTradeDate(Date.valueOf(LocalDate.now()));
         trade.setTradeSettlementDate(Date.valueOf(LocalDate.now()));
 
-
-        this.book = new Book();
-        book.setBookName("trading_book_8");
-
-        Set<Book> set = new HashSet<>();
-        Set<User> setUser = new HashSet<>();
         Set<Trade> setTrades = new HashSet<>();
-
         setTrades.add(trade);
-        set.add(book);
 
+        client = new CounterParty();
+        client.setHolderName("Atta Systems");
         client.setTrades(setTrades);
+
+        Book book = new Book();
+        book.setBookName("trading_book_8");
+        book.setTrades(setTrades);
+
+        Set<Book> setBook = new HashSet<>();
+        setBook.add(book);
 
         User user = new User();
         user.setUserName("Michael");
         user.setPassword("michael");
-        user.setUserBooks(set);
+        user.setUserBooks(setBook);
+
+        Set<User> setUser = new HashSet<>();
         setUser.add(user);
+
         book.setBookUsers(setUser);
-        book.setTrades(setTrades);
 
         trade.setBook(book);
         trade.setCounterparty(client);
@@ -93,6 +91,8 @@ class TradeServiceTest {
 
     @Test
     void getAllTrades() {
+        int tradesCount = tradeRepository.findAll().size();
+        assertThat(tradeService.getAllTrades().size()).isEqualTo(tradesCount);
     }
 
     @Test

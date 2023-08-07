@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
 class BookServiceTest {
-
     @Autowired
     private BookService bookService;
     @Autowired
@@ -29,25 +28,21 @@ class BookServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    private Book book;
-
-
 
     @BeforeAll
     void setUp() {
-        this.book = new Book();
+        Book book = new Book();
         book.setBookName("trading_book_7");
 
-        Set<Book> set = new HashSet<>();
-        Set<User> setUser = new HashSet<>();
-
-        set.add(book);
-
+        Set<Book> setBook = new HashSet<>();
+        setBook.add(book);
 
         User user = new User();
         user.setUserName("Michael");
         user.setPassword("michael");
-        user.setUserBooks(set);
+        user.setUserBooks(setBook);
+
+        Set<User> setUser = new HashSet<>();
         setUser.add(user);
         book.setBookUsers(setUser);
 
