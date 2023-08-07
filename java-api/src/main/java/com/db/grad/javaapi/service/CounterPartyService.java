@@ -38,6 +38,7 @@ public class CounterPartyService {
                 .flatMap(Collection::stream)
                 .map(Trade::getCounterparty)
                 .distinct()
+                .sorted(Comparator.comparing(CounterParty::getHolderName))
                 .collect(Collectors.toList());
     }
 
