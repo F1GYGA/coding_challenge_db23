@@ -41,7 +41,8 @@ public class CounterPartyController {
                 bondDtoList.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
                         bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate(), holders));
             }
-            list.add(new CounterPartyDto(counterParty.getId(), counterParty.getHolderName(), bondDtoList));
+            float position = counterPartyService.getPosition(counterParty, username);
+            list.add(new CounterPartyDto(counterParty.getId(), counterParty.getHolderName(), position, bondDtoList));
         }
 
         return list;

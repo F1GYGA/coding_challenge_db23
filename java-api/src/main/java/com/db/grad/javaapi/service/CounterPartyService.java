@@ -1,5 +1,6 @@
 package com.db.grad.javaapi.service;
 
+import com.db.grad.javaapi.enums.TradeType;
 import com.db.grad.javaapi.model.Book;
 import com.db.grad.javaapi.model.CounterParty;
 import com.db.grad.javaapi.model.Trade;
@@ -10,14 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class CounterPartyService {
+
+    private float GBPUSD = 1.27F;
 
     @Autowired
     private CounterPartyRepository counterPartyRepo;
@@ -40,6 +40,31 @@ public class CounterPartyService {
                 .distinct()
                 .sorted(Comparator.comparing(CounterParty::getHolderName))
                 .collect(Collectors.toList());
+    }
+
+    public float getPosition(CounterParty client, String username) {
+        User user = userRepo.findByUserName(username).orElseThrow(() ->
+                new UsernameNotFoundException("User not found with username: " + username));
+        List<Book> books = new ArrayList<>(user.getUserBooks());
+        List<Trade> trades = books.stream()
+                .map(Book::getTrades)
+                .flatMap(Collection::stream)
+                .distinct()
+                .filter(trade -> trade.getCounterparty() == client)
+                .collect(Collectors.toList());
+        float position = 0;
+        for (Trade trade : trades) {
+            float value = trade.getQuantity() * trade.getUnitPrice();
+            if (Objects.equals(trade.getCurrency(), "GBP")) {
+                value *= GBPUSD;
+            }
+            if (trade.getTradeType() == TradeType.buy) {
+                position += value;
+            } else {
+                position -= value;
+            }
+        }
+        return position;
     }
 
 }

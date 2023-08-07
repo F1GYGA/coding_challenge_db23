@@ -35,7 +35,7 @@ public class BondDto {
         this.status = status;
         this.type = type;
         this.maturityDate = maturityDate;
-        this.bondHolders = holders.stream().map(holder -> new CounterPartyDto(holder.getId(), holder.getHolderName(), Collections.emptyList())).collect(Collectors.toList());
+        this.bondHolders = holders.stream().map(holder -> new CounterPartyDto(holder.getId(), holder.getHolderName(), 0, Collections.emptyList())).collect(Collectors.toList());
     }
 
     @Override
