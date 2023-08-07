@@ -47,8 +47,8 @@ public class BondController {
 
 
     @PatchMapping("/bonds/maturity/redeem")
-    public void triggerRedeemBond(@RequestParam String isim) {
-        bondService.updateStatus(isim);
+    public void triggerRedeemBond(@RequestParam String isin) {
+        bondService.updateStatus(isin);
     }
 }
 
