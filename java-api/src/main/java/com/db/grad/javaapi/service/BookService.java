@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -27,6 +28,8 @@ public class BookService {
     public List<Book> getUserBooks(String username) {
         User user = userRepo.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("User not found with username: " + username));
-        return new ArrayList<>(user.getUserBooks());
+        List<Book> result = new ArrayList<>(user.getUserBooks());
+        result.sort(Comparator.comparing(Book::getBookName));
+        return result;
     }
 }
