@@ -5,15 +5,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-const CollapsableTable = ({rows}) => {
-    const [date, setDate] = useState(new Date());
+const CollapsableTable = (props) => {
     return (
         <>
-            <DatePicker selected={date} onChange={(startDate) => setDate(startDate)} />
-            
-            <TableContainer component={Paper}
-            // 
-            >
+            <TableContainer component={Paper}>
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
@@ -26,8 +21,8 @@ const CollapsableTable = ({rows}) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <Row key={row.name} row={row} day={date} />
+                        {props.rows.map((row) => (
+                            <Row key={row.name} row={row} day={props.date} />
                         ))}
                     </TableBody>
                 </Table>
