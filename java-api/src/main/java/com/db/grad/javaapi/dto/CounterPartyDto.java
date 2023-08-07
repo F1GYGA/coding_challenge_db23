@@ -1,5 +1,6 @@
 package com.db.grad.javaapi.dto;
 
+import com.db.grad.javaapi.model.Trade;
 import lombok.Data;
 
 import java.util.List;
@@ -8,10 +9,10 @@ import java.util.List;
 public class CounterPartyDto {
     private long id;
     private String holderName;
-    private float position;
-    private List<BondDto> bonds;
+    private double position;
+    private List<TradeDto> bonds;
 
-    public CounterPartyDto(long id, String holderName, float position, List<BondDto> bonds) {
+    public CounterPartyDto(long id, String holderName, double position, List<TradeDto> bonds) {
         this.id = id;
         this.holderName = holderName;
         this.position = position;

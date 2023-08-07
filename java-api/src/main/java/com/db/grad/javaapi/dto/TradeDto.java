@@ -16,9 +16,12 @@ public class TradeDto {
     private float unitPrice;
     private Date tradeDate;
     private Date tradeSettlementDate;
+    private CounterPartyDto counterParty;
+    private BondDto bond;
 
     public TradeDto(long id, TradeType tradeType, int quantity, String currency,
-                    TradeStatus tradeStatus, float unitPrice, Date tradeDate, Date tradeSettlementDate) {
+                    TradeStatus tradeStatus, float unitPrice, Date tradeDate, Date tradeSettlementDate,
+                    CounterPartyDto counterParty, BondDto bond) {
         this.id = id;
         this.tradeType = tradeType;
         this.quantity = quantity;
@@ -27,5 +30,7 @@ public class TradeDto {
         this.unitPrice = unitPrice;
         this.tradeDate = tradeDate;
         this.tradeSettlementDate = tradeSettlementDate;
+        this.counterParty = counterParty;
+        this.bond = bond;
     }
 }

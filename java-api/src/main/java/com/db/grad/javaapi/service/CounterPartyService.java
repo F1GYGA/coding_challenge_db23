@@ -42,7 +42,7 @@ public class CounterPartyService {
                 .collect(Collectors.toList());
     }
 
-    public float getPosition(CounterParty client, String username) {
+    public double getPosition(CounterParty client, String username) {
         User user = userRepo.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("User not found with username: " + username));
         List<Book> books = new ArrayList<>(user.getUserBooks());
@@ -52,9 +52,9 @@ public class CounterPartyService {
                 .distinct()
                 .filter(trade -> trade.getCounterparty() == client)
                 .collect(Collectors.toList());
-        float position = 0;
+        double position = 0;
         for (Trade trade : trades) {
-            float value = trade.getQuantity() * trade.getUnitPrice();
+            double value = (1d * trade.getQuantity()) * trade.getUnitPrice();
             if (Objects.equals(trade.getCurrency(), "GBP")) {
                 value *= GBPUSD;
             }
