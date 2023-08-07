@@ -38,8 +38,8 @@ class BookServiceTest {
         setBook.add(book);
 
         User user = new User();
-        user.setUserName("Michael");
-        user.setPassword("michael");
+        user.setUserName("Andrew");
+        user.setPassword("andrew");
         user.setUserBooks(setBook);
 
         Set<User> setUser = new HashSet<>();

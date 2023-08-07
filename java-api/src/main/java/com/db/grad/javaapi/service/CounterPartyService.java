@@ -50,7 +50,7 @@ public class CounterPartyService {
                 .map(Book::getTrades)
                 .flatMap(Collection::stream)
                 .distinct()
-                .filter(trade -> trade.getCounterparty() == client)
+                .filter(trade -> trade.getCounterparty().equals(client))
                 .collect(Collectors.toList());
         double position = 0;
         for (Trade trade : trades) {

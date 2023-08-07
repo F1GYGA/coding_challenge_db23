@@ -71,8 +71,8 @@ class TradeServiceTest {
         setBook.add(book);
 
         User user = new User();
-        user.setUserName("Michael");
-        user.setPassword("michael");
+        user.setUserName("Ana");
+        user.setPassword("ana");
         user.setUserBooks(setBook);
 
         Set<User> setUser = new HashSet<>();
@@ -97,7 +97,7 @@ class TradeServiceTest {
 
     @Test
     void getClientTrades() {
-        List<Trade> trades = tradeService.getClientTrades(client, "Michael");
+        List<Trade> trades = tradeService.getClientTrades(client, "Ana");
         assertEquals(1, trades.size());
     }
 }
