@@ -11,4 +11,6 @@ public interface BondRepository extends JpaRepository<Bond, Integer> {
 
     List<Bond> findAll();
 
+    Bond findByIsim(String isim);
+
 }

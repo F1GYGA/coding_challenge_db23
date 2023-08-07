@@ -87,17 +87,9 @@ public class BondController {
     }
 
 
-    @GetMapping("/bonds/maturity/redeem")
-    public List<BondDto> triggerRedeemBond(@RequestParam String isim) {
-        List<BondDto> result = new ArrayList<>();
-
-        for (Bond bond : bondService.getUpdatedBondsAfterRedemption(isim)) {
-            List<CounterParty> holders = bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
-            result.add(new BondDto(bond.getIsin(), bond.getCusip(), bond.getBondCurrency(), bond.getCouponPercent(),
-                    bond.getFaceValue(), bond.getIssuerName(), bond.getStatus(), bond.getType(), bond.getMaturityDate(), holders));
-        }
-
-        return result;
+    @PatchMapping("/bonds/maturity/redeem")
+    public void triggerRedeemBond(@RequestParam String isim) {
+        bondService.updateStatus(isim);
     }
 
     @GetMapping("/bonds/maturity/redeemed")

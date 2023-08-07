@@ -6,6 +6,7 @@ import com.db.grad.javaapi.repository.BondRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,17 +96,11 @@ public class BondService {
         return result;
     }
 
-    public List<Bond> getUpdatedBondsAfterRedemption(String isim) {
-        List<Bond> result = new ArrayList<>();
-
-        for (Bond bond : getAllBonds()) {
-            if (bond.getIsin().equals(isim)) {
-                bond.setStatus("inactive");
-            }
-            result.add(bond);
-        }
-
-        return result;
+    @Transactional
+    public void updateStatus(String isim) {
+        Bond bond = bondRepo.findByIsim(isim);
+        bond.setStatus("inactive");
+        bondRepo.save(bond);
     }
 
     public List<Bond> getRedeemedBonds() {
