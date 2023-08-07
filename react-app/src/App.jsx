@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import AllBonds from "./components/AllBonds";
 import BondsMaturity from "./components/BondsMaturity";
+import Clients from "./components/Clients";
 import LogIn from './components/LogIn';
 import UserBooks from './components/UserBooks';
 import { Route, Routes } from 'react-router';
@@ -24,6 +25,7 @@ const App = () => {
               <Nav.Link href="/bonds">All Bonds</Nav.Link>
               <Nav.Link href="/bonds/maturity">Maturing Bonds</Nav.Link>
               <Nav.Link href="/books">My Books</Nav.Link>
+              <Nav.Link href="/clients">My Clients</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -36,7 +38,8 @@ const App = () => {
             <Route path="/login" exact element={<LogIn />} />
             <Route path="/bonds" exact element={<AllBonds />} />
             <Route path="/bonds/maturity" exact element={<BondsMaturity />} />
-             <Route path="/books" exact element={<UserBooks/>} />
+            <Route path="/books" exact element={<UserBooks/>} />
+            <Route path="/clients" exact element={<Clients/>} />
             <Route path="/" exact element={<LogIn />} />
             <Route path="/trades" exact element={<Trades />}></Route>
      // <Route path="/trades" exact element={<Trades />}></Route>

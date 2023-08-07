@@ -4,6 +4,7 @@ package com.db.grad.javaapi.dto;
 import com.db.grad.javaapi.enums.BondType;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class BondDto {
         this.status = status;
         this.type = type;
         this.maturityDate = maturityDate;
-        this.bondHolders = holders.stream().map(holder -> new CounterPartyDto(holder.getId(), holder.getHolderName())).collect(Collectors.toList());
+        this.bondHolders = holders.stream().map(holder -> new CounterPartyDto(holder.getId(), holder.getHolderName(), 0, Collections.emptyList())).collect(Collectors.toList());
     }
 
     @Override

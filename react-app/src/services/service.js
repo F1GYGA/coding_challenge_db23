@@ -20,8 +20,10 @@ export async function getUserBooks(){
     });
 }
 
-export function getCounterParties(){
-    return http.get("/counterparties");
+export async function getCounterParties(){
+    return await axios.get('http://127.0.0.1:8080/counterparties', {
+        withCredentials: true,
+    });
 }
 
 export function getTrades(){
