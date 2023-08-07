@@ -1,8 +1,8 @@
 import * as React from 'react';
-import CollapsibleTable from './CollapsableTable';
+import CollapsableTable from './CollapsableTable/CollapsableTable';
 
 const BondsDetail = (props) => {
-    return <CollapsibleTable rows={props.info} date={props.date}/>
+    return <CollapsableTable rows={props.info} date={props.date}/>
 }
 
 export default BondsDetail;
