@@ -4,14 +4,17 @@ import Row from "../Row";
 
 const CollapsableTable = ({rows}) => {
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper}
+        // 
+        >
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell />
                         <TableCell>ISIN</TableCell>
+                        <TableCell align="center">Maturity Date</TableCell>
                         <TableCell align="center">CUSIP</TableCell>
                         <TableCell align="center">Issuer</TableCell>
+                        <TableCell />
                     </TableRow>
                 </TableHead>
                 <TableBody>
