@@ -31,7 +31,7 @@ const Clients = () => {
     return (
         <Collapse>
             {clients.map((client) => (
-                <Panel header={client.holderName} key={client.id}>
+                <Panel header={client.holderName + " Bonds: " + client.bonds.length + " Position: " + client.position} key={client.id}>
                     <BondsDetail info={client.bonds} />
                 </Panel>
             ))}
