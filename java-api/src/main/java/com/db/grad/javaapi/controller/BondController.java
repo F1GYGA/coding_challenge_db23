@@ -50,5 +50,6 @@ public class BondController {
     public void triggerRedeemBond(@RequestParam String isin) {
         bondService.updateStatus(isin);
     }
+
 }
 
