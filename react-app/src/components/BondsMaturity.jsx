@@ -32,7 +32,7 @@ const BondsMaturity = () => {
   return (
     <>
       <DatePicker selected={date} onChange={(startDate)=>setDate(startDate)}/>
-      <BondsDetail info={bonds} />
+      <BondsDetail info={bonds} date={date} />
       
     </>
   )
