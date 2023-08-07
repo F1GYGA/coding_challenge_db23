@@ -16,7 +16,7 @@ const CollapsableTable = (props) => {
                             <TableCell align="center">Maturity Date</TableCell>
                             <TableCell align="center">CUSIP</TableCell>
                             <TableCell align="center">Issuer</TableCell>
-                            <TableCell align='center'>Attention</TableCell>
+                            {props.date != null && <TableCell align='center'>Attention</TableCell>}
                             <TableCell />
                         </TableRow>
                     </TableHead>
