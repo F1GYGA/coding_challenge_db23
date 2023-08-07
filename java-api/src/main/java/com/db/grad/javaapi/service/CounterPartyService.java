@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class CounterPartyService {
 
-    private float GBPUSD = 1.27F;
+    private double GBPUSD = 1.27;
 
     @Autowired
     private CounterPartyRepository counterPartyRepo;
@@ -54,7 +54,7 @@ public class CounterPartyService {
                 .collect(Collectors.toList());
         double position = 0;
         for (Trade trade : trades) {
-            double value = (1d * trade.getQuantity()) * trade.getUnitPrice();
+            double value = ((double) trade.getQuantity()) * ((double) trade.getUnitPrice());
             if (Objects.equals(trade.getCurrency(), "GBP")) {
                 value *= GBPUSD;
             }

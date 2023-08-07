@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import BondsDetail from './BondsDetail'
+import TradesCollapsableTable from './TradesCollapseTable'
 import { useEffect } from 'react';
 import { getCounterParties } from '../services/service';
 import { Collapse } from 'antd';
@@ -31,8 +31,8 @@ const Clients = () => {
     return (
         <Collapse>
             {clients.map((client) => (
-                <Panel header={client.holderName + " Bonds: " + client.bonds.length + " Position: " + client.position + "$"} key={client.id}>
-                    <BondsDetail info={client.bonds} />
+                <Panel header={client.holderName + " Position: $" + client.position.toFixed(2)} key={client.id}>
+                    <TradesCollapsableTable rows = {client.trades} counterparty={client.holderName} />
                 </Panel>
             ))}
         </Collapse>
