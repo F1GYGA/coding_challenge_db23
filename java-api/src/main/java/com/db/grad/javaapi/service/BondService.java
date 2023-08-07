@@ -50,6 +50,13 @@ public class BondService {
                 .collect(Collectors.toList());
     }
 
+    public List<Bond> getClientBonds(CounterParty client) {
+        return client.getTrades().stream()
+                .map(Trade::getBond)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
     public List<CounterParty> getHolders(Bond bond) {
         return bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
     }
