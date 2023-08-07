@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import BondsDetail from './BondsDetail'
 import { useEffect } from 'react';
 import { getAllBonds } from '../services/service';
-
-//const bonds = []
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AllBonds = () => {
   const [bonds, setBonds] = useState([]);
-  
+  const [date, setDate] = useState(new Date());
+
   useEffect(() => {
     getBondsFromAPI();
-  },[]);
+  }, []);
 
   const getBondsFromAPI = () => {
     getAllBonds()
@@ -25,10 +26,11 @@ const AllBonds = () => {
   }
 
 
-
-
   return (
-    <BondsDetail info={bonds} />
+    <>
+      <DatePicker selected={date} onChange={(startDate) => setDate(startDate)} />
+      <BondsDetail info={bonds} date={date}/>
+    </>
   )
 }
 

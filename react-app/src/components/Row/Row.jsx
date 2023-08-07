@@ -1,18 +1,30 @@
 import { Box, Collapse, IconButton, TableCell, TableRow, Typography } from "@mui/material";
 import React from "react";
 
-const Row=({row}) =>{
-    const [open, setOpen] = React.useState(false);
 
+
+const Row = (props) => {
+    const [open, setOpen] = React.useState(false);
+    const today = props.day?.toISOString().slice(0, 10);
     return (
+
         <React.Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">
-                    {row.isin}
+                    {props.row.isin}
                 </TableCell>
-                <TableCell align='center'>{row.maturityDate}</TableCell>
-                <TableCell align="center">{row.cusip}</TableCell>
-                <TableCell align="center">{row.issuerName}</TableCell>
+                <TableCell align='center'>{props.row.maturityDate}</TableCell>
+                <TableCell align="center">{props.row.cusip}</TableCell>
+                <TableCell align="center">{props.row.issuerName}</TableCell>
+                {today != null && props.row.maturityDate === today
+                && <TableCell align='center' sx={{color:'orange',}}>! due to mature today</TableCell>}
+                {today != null && Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status === 'active'
+                && <TableCell align='center' sx={{color:'red',}}>! post maturity and not redeemed yet</TableCell>}
+                {today != null && Date.parse(props.row.maturityDate) > Date.parse(today)
+                && <TableCell align='center'>- - -</TableCell>}
+                {today != null && Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status !== 'active'
+                && <TableCell align='center'>- - -</TableCell>}
+                
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
@@ -31,29 +43,29 @@ const Row=({row}) =>{
                                 Bond details
                             </Typography>
                             <div>
-                                Currency: {row.bondCurrency}
+                                Currency: {props.row.bondCurrency}
                             </div>
                             <div>
-                                Coupon Percent: {row.couponPercent}
+                                Coupon Percent: {props.row.couponPercent}
                             </div>
                             <div>
-                                Face Value: {row.faceValue}
+                                Face Value: {props.row.faceValue}
                             </div>
                             <div>
-                                Status: {row.status}
+                                Status: {props.row.status}
                             </div>
                             <div>
-                                Type: {row.type}
+                                Type: {props.row.type}
                             </div>
                             <div>
-                                Holder Name: {row.bondHolders.map(holder => holder.holderName).join(',')}
-                                
+                                Holder Name: {props.row.bondHolders.map(holder => holder.holderName).join(',')}
                             </div>
                         </Box>
                     </Collapse>
                 </TableCell>
             </TableRow>
         </React.Fragment>
+
     );
 }
 

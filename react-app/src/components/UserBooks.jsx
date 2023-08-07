@@ -32,7 +32,7 @@ const UserBooks = () => {
         <Collapse>
             {books.map((book) => (
                 <Panel header={book.bookName} key={book.id}>
-                    <BondsDetail info={book.bonds} />
+                    <BondsDetail info={book.bonds} date ={null}/>
                 </Panel>
             ))}
         </Collapse>
