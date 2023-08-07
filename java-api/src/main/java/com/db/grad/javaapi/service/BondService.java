@@ -70,8 +70,8 @@ public class BondService {
     }
 
     @Transactional
-    public void updateStatus(String isim) {
-        Bond bond = bondRepo.findByIsin(isim);
+    public void updateStatus(String isin) {
+        Bond bond = bondRepo.findByIsin(isin);
         bond.setStatus("inactive");
         bondRepo.save(bond);
     }
