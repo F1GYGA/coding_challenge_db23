@@ -30,7 +30,7 @@ export function getTrades(){
 
 
 export async function changeStatus(isin){
-    return await axios.patch('http://127.0.0.1:8080/bonds/maturity/redeem?isin=' + isin, {
+    return await axios.patch('http://127.0.0.1:8080/bonds/maturity/redeem?isin=' + isin, {},{
         withCredentials: true,
     });
 }

@@ -9,12 +9,13 @@ const Row = (props) => {
     const [open, setOpen] = React.useState(false);
     const today = props.day.toISOString().slice(0, 10);
     
+
     const navigate = useNavigate();
     const sendISIN = (event) =>{
         event.preventDefault();
         console.log(props.row.isin);
         changeStatus(props.row.isin);
-        navigate("/bonds");
+        window.location.reload(false);
     }
 
 
