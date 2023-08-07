@@ -17,6 +17,7 @@ const CollapsableTable = (props) => {
                             <TableCell align="center">CUSIP</TableCell>
                             <TableCell align="center">Issuer</TableCell>
                             <TableCell align='center'>Attention</TableCell>
+                            <TableCell align='center'>Redeem</TableCell>
                             <TableCell />
                         </TableRow>
                     </TableHead>
