@@ -4,11 +4,13 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+
 const CollapsableTable = ({rows}) => {
     const [date, setDate] = useState(new Date());
     return (
         <>
             <DatePicker selected={date} onChange={(startDate) => setDate(startDate)} />
+            
             <TableContainer component={Paper}
             // 
             >
@@ -19,7 +21,7 @@ const CollapsableTable = ({rows}) => {
                             <TableCell align="center">Maturity Date</TableCell>
                             <TableCell align="center">CUSIP</TableCell>
                             <TableCell align="center">Issuer</TableCell>
-                            <TableCell />
+                            <TableCell align='center'>Attention</TableCell>
                             <TableCell />
                         </TableRow>
                     </TableHead>
