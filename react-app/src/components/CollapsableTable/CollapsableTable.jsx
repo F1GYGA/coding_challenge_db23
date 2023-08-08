@@ -1,7 +1,5 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Row from "../Row";
-import { useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
@@ -16,8 +14,8 @@ const CollapsableTable = (props) => {
                             <TableCell align="center">Maturity Date</TableCell>
                             <TableCell align="center">CUSIP</TableCell>
                             <TableCell align="center">Issuer</TableCell>
-                            <TableCell align='center'>Attention</TableCell>
-                            <TableCell align='center'>Redeem</TableCell>
+                            {props.date != null && <TableCell align='center'>Attention</TableCell>}
+                            {props.date != null && <TableCell align='center'>Redeem</TableCell>}
                             <TableCell />
                         </TableRow>
                     </TableHead>

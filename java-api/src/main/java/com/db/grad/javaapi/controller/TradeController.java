@@ -1,5 +1,6 @@
 package com.db.grad.javaapi.controller;
 
+import com.db.grad.javaapi.dto.CounterPartyDto;
 import com.db.grad.javaapi.dto.TradeDto;
 import com.db.grad.javaapi.model.Trade;
 import com.db.grad.javaapi.service.TradeService;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TradeController {
 
     @Autowired
@@ -24,7 +25,8 @@ public class TradeController {
 
         for (Trade trade : tradeService.getAllTrades())
             list.add(new TradeDto(trade.getId(), trade.getTradeType(), trade.getQuantity(), trade.getCurrency(),
-                    trade.getTradeStatus(), trade.getUnitPrice(), trade.getTradeDate(), trade.getTradeSettlementDate()));
+                    trade.getTradeStatus(), trade.getUnitPrice(), trade.getTradeDate(), trade.getTradeSettlementDate(),
+                    null, null));
 
         return list;
     }

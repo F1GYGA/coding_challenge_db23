@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,11 +48,24 @@ public class BondService {
         return book.getTrades().stream()
                 .map(Trade::getBond)
                 .distinct()
+                .sorted(Comparator.comparing(Bond::getIsin))
+                .collect(Collectors.toList());
+    }
+
+    public List<Bond> getClientBonds(CounterParty client) {
+        return client.getTrades().stream()
+                .map(Trade::getBond)
+                .distinct()
+                .sorted(Comparator.comparing(Bond::getIsin))
                 .collect(Collectors.toList());
     }
 
     public List<CounterParty> getHolders(Bond bond) {
-        return bond.getTrades().stream().map(Trade::getCounterparty).distinct().collect(Collectors.toList());
+        return bond.getTrades().stream()
+                .map(Trade::getCounterparty)
+                .distinct()
+                .sorted(Comparator.comparing(CounterParty::getHolderName))
+                .collect(Collectors.toList());
     }
 
 }

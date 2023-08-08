@@ -5,8 +5,6 @@ import { getAllBonds } from '../services/service';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-//const bonds = []
-
 const AllBonds = () => {
   const [bonds, setBonds] = useState([]);
   const [date, setDate] = useState(new Date());

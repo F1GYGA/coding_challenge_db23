@@ -4,7 +4,6 @@ import {Button} from 'react-bootstrap'
 import { changeStatus } from "../../services/service";
 import { useNavigate } from "react-router";
 
-
 const Row = (props) => {
     const [open, setOpen] = React.useState(false);
     const today = props.day.toISOString().slice(0, 10);
@@ -17,8 +16,7 @@ const Row = (props) => {
         changeStatus(props.row.isin);
         window.location.reload(false);
     }
-
-
+    
     return (
 
         <React.Fragment>
@@ -29,24 +27,23 @@ const Row = (props) => {
                 <TableCell align='center'>{props.row.maturityDate}</TableCell>
                 <TableCell align="center">{props.row.cusip}</TableCell>
                 <TableCell align="center">{props.row.issuerName}</TableCell>
-                {props.row.maturityDate === today
+                {today != null && props.row.maturityDate === today
                 && <TableCell align='center' sx={{color:'orange',}}>! due to mature today</TableCell>}
-                {Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status === 'active'
+                {today != null && Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status === 'active'
                 && <TableCell align='center' sx={{color:'red',}}>! post maturity and not redeemed yet</TableCell>}
-                {Date.parse(props.row.maturityDate) > Date.parse(today)
+                {today != null && Date.parse(props.row.maturityDate) > Date.parse(today)
                 && <TableCell align='center'>- - -</TableCell>}
-                {Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status !== 'active'
+                {today != null && Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status !== 'active'
                 && <TableCell align='center'>- - -</TableCell>}
                 
-                {Date.parse(props.row.maturityDate) <= Date.parse(today) && props.row.status === 'active'
+                {today != null && Date.parse(props.row.maturityDate) <= Date.parse(today) && props.row.status === 'active'
                 && <TableCell align='center'>
                         <Button variant="primary" type="submit" onClick={sendISIN}>Redeem</Button>
                     </TableCell>}
-                {Date.parse(props.row.maturityDate) > Date.parse(today) && props.row.status === 'active'
+                {today != null && Date.parse(props.row.maturityDate) > Date.parse(today) && props.row.status === 'active'
                 && <TableCell align='center'>Cannot redeem yet</TableCell>}
-                {Date.parse(props.row.maturityDate) <= Date.parse(today) && props.row.status !== 'active'
+                {today != null && Date.parse(props.row.maturityDate) <= Date.parse(today) && props.row.status !== 'active'
                 && <TableCell align='center'>Redeemed</TableCell>}
-
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
@@ -81,7 +78,6 @@ const Row = (props) => {
                             </div>
                             <div>
                                 Holder Name: {props.row.bondHolders.map(holder => holder.holderName).join(',')}
-
                             </div>
                         </Box>
                     </Collapse>
