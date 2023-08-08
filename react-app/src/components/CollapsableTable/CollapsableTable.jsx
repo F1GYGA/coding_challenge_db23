@@ -15,6 +15,7 @@ const CollapsableTable = (props) => {
                             <TableCell align="center">CUSIP</TableCell>
                             <TableCell align="center">Issuer</TableCell>
                             {props.date != null && <TableCell align='center'>Attention</TableCell>}
+                            {props.date != null && <TableCell align='center'>Redeem</TableCell>}
                             <TableCell />
                         </TableRow>
                     </TableHead>

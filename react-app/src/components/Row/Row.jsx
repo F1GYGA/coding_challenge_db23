@@ -1,11 +1,22 @@
 import { Box, Collapse, IconButton, TableCell, TableRow, Typography } from "@mui/material";
 import React from "react";
-
-
+import {Button} from 'react-bootstrap'
+import { changeStatus } from "../../services/service";
+import { useNavigate } from "react-router";
 
 const Row = (props) => {
     const [open, setOpen] = React.useState(false);
-    const today = props.day?.toISOString().slice(0, 10);
+    const today = props.day.toISOString().slice(0, 10);
+    
+
+    const navigate = useNavigate();
+    const sendISIN = (event) =>{
+        event.preventDefault();
+        console.log(props.row.isin);
+        changeStatus(props.row.isin);
+        window.location.reload(false);
+    }
+    
     return (
 
         <React.Fragment>
@@ -25,6 +36,14 @@ const Row = (props) => {
                 {today != null && Date.parse(props.row.maturityDate) < Date.parse(today) && props.row.status !== 'active'
                 && <TableCell align='center'>- - -</TableCell>}
                 
+                {today != null && Date.parse(props.row.maturityDate) <= Date.parse(today) && props.row.status === 'active'
+                && <TableCell align='center'>
+                        <Button variant="primary" type="submit" onClick={sendISIN}>Redeem</Button>
+                    </TableCell>}
+                {today != null && Date.parse(props.row.maturityDate) > Date.parse(today) && props.row.status === 'active'
+                && <TableCell align='center'>Cannot redeem yet</TableCell>}
+                {today != null && Date.parse(props.row.maturityDate) <= Date.parse(today) && props.row.status !== 'active'
+                && <TableCell align='center'>Redeemed</TableCell>}
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
