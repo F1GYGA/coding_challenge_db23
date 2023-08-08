@@ -6,10 +6,13 @@ import com.db.grad.javaapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
@@ -22,6 +25,10 @@ public class BondService {
 
     @Autowired
     private UserRepository userRepo;
+
+    public Optional<Bond> findBondByIsin(String isin) {
+        return Optional.ofNullable(bondRepo.findByIsin(isin));
+    }
 
     public List<Bond> getAllBonds() {
         return bondRepo.findAll();
@@ -52,13 +59,13 @@ public class BondService {
                 .collect(Collectors.toList());
     }
 
-    public List<Bond> getClientBonds(CounterParty client) {
-        return client.getTrades().stream()
-                .map(Trade::getBond)
-                .distinct()
-                .sorted(Comparator.comparing(Bond::getIsin))
-                .collect(Collectors.toList());
-    }
+//    public List<Bond> getClientBonds(CounterParty client) {
+//        return client.getTrades().stream()
+//                .map(Trade::getBond)
+//                .distinct()
+//                .sorted(Comparator.comparing(Bond::getIsin))
+//                .collect(Collectors.toList());
+//    }
 
     public List<CounterParty> getHolders(Bond bond) {
         return bond.getTrades().stream()
@@ -68,5 +75,11 @@ public class BondService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void updateStatus(String isin) {
+        Bond bond = bondRepo.findByIsin(isin);
+        bond.setStatus("inactive");
+        bondRepo.save(bond);
+    }
 }
 

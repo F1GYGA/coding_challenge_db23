@@ -3,12 +3,16 @@ package com.db.grad.javaapi.model;
 import com.db.grad.javaapi.enums.BondType;
 import com.db.grad.javaapi.enums.TradeStatus;
 import com.db.grad.javaapi.enums.TradeType;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table(name = "trades")
+@EqualsAndHashCode
+@ToString
 public class Trade {
 
     @Id

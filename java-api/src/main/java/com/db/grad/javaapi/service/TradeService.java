@@ -35,7 +35,7 @@ public class TradeService {
         return books.stream()
                 .map(Book::getTrades)
                 .flatMap(Collection::stream)
-                .filter(trade -> trade.getCounterparty() == client)
+                .filter(trade -> trade.getCounterparty().equals(client))
                 .distinct()
                 .collect(Collectors.toList());
     }

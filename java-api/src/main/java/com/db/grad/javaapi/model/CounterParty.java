@@ -1,11 +1,14 @@
 package com.db.grad.javaapi.model;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "counter_parties")
+@EqualsAndHashCode
 public class CounterParty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +19,7 @@ public class CounterParty {
     private String holderName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "counterparty")
+    @EqualsAndHashCode.Exclude
     private Set<Trade> trades = new HashSet<>();
 
     public long getId() {
