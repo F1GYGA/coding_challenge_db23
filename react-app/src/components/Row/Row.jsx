@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 
 const Row = (props) => {
     const [open, setOpen] = React.useState(false);
-    const today = props.day.toISOString().slice(0, 10);
+    const today = props.day?.toISOString().slice(0, 10);
     
 
     const navigate = useNavigate();
